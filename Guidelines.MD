@@ -27,66 +27,44 @@
 ### 1. Beginning the Response
 
 #### Acknowledgement and Interpretation
-- Start by **acknowledging** or **interpreting** the user's query.
-- **Identify** any relevant **concepts** and provide explanations.
+- Start by **acknowledging** the user's query, ensuring there's clarity on what's being asked.
+- **Identify** any key **concepts** involved and give a succinct explanation if necessary.
 
 #### Uncertainty and Correction
-- If the intent of the user's query is uncertain, make an effort to interpret it and provide helpful answers.
-- Correct any incorrect information provided by the user with your best effort.
-
-| ✅ **Correct Approach** | ❌ **Incorrect Approach** |
-|------------------------|--------------------------|
-| **User:** Implement a function in Python that counts the number of set bits (1s) in the binary representation of a given integer. | **User:** Implement a function in python that counts the number of set bits (1s) in the binary representation of a given integer. |
-|**Identified the concept used to solve the problem; and added a longer explanation because the user's query did not original include the name of the concept (algorithm)** <br><br>**Assistant:** You can count the number of set bits (1s) in the binary representation of an integer using Brian Kernighan's Algorithm. This algorithm works by repeatedly flipping the least significant set bit of the number to 0 and counting how many times this operation is done until the number becomes 0. The algorithm takes advantage of the fact that subtracting 1 from a number flips all the bits after the least significant set bit. Here's how you can implement it in Python: `{code}` | **Did not interpret the query or identify any concepts used in the code**<br><br>**Assistant:** Sure! `{code}`... |
-| **User:** I want to move all .py files from a directory to another. Remember, my source directory has a nested structure, which I want to preserve in the destination directory. Write python script for this. | **User:** I want to move all .py files from a directory to another. Remember, my source directory has a nested structure, which I want to preserve in the destination directory. Write python script for this. |
-| **Interpreted the query with multiple conditions (move directory + nested + preserve destination) in a concise manner.**<br><br>**Assistant:** Sure, I can help you move all .py files from one directory to another while preserving the nested directory structure. | **Jumped strained into code without any Beginning**<br><br>**Assistant:****Assistant:** Sure. This is how it is implemented: `{code}` |
-| **User:** Print I love coding in C | **User:** Print I love coding in C |
-| **Direct reply for a short query**<br><br>**Assistant:** To print "I love coding in C" in a C program, you would use the printf function. Here is a simple example: `{code}` |**Over-explaining for a simple request**<br><br> **Assistant:** To begin writing a program in the C programming language that outputs the phrase "I love coding in C" to the console, one must first understand the fundamental structure and syntax of a C program... |
+- If the query's intent is unclear, attempt to interpret it and provide a constructive response.
+- Correct any misinformation in the user's query with tact and accuracy.
 
 #### Key Takeaways
-- **Understand the intent of the prompt** 
-- **Interpretation**: Clearly acknowledge the user's request or question before proceeding.
-- **Concept Identification**: Identify and explain key concepts or methods that will be used to address the query.
-- **Avoid Over-Simplification**: Provide an explanation that educates the user without assuming prior knowledge.
-- **Avoid Over-Complexity**: Do not over-explain with unnecessary context for simple requests.
+- **Understand the Prompt**: Grasp the intent behind the user's request before responding.
+- **Interpretation**: Begin your response by clearly acknowledging the query.
+- **Concept Identification**: Briefly explain relevant concepts or methods to be used.
+- **Balance**: Avoid oversimplifying for complex queries or overcomplicating simple ones.
 
 ### 2. Code Explanation
 
-#### Types of Explanations
-- **Brief Overview**: Provide a high-level overview of the approach before the code without diving into individual steps.
-- **Detailed Description**: Offer a more detailed explanation after the code, possibly referencing specific lines, functions, and variables.
+#### Overview and Code Presentation
+- **Brief Overview**: Offer a high-level overview of your approach in no more than four sentences before presenting the code. This helps set the context without overwhelming the user with details upfront.
+- **Code**: Present the code block right after your brief overview, ensuring it directly addresses the user's request.
 
-#### Importance of Context
-- Understand the **intent of the query** and **user's knowledge level** to tailor the explanation appropriately.
+#### Detailed Explanation
+- **Post-Code Explanation**: Dive into a more detailed explanation after the code, referencing specific lines, functions, and variables as needed. Aim for clarity and brevity, similar to the successful explanations in previous work.
 
-| ✅ **Correct Approach** | ❌ **Incorrect Approach** |
-|------------------------|--------------------------|
-| **User:** I want to move all .py files from a directory to another, preserving the nested structure. | **User:** I want to move all .py files from a directory to another, preserving the nested structure. |
-| **Assistant:** The overall approach involves recursively searching through all the python files to determine their corresponding source and destination paths. Here is how it is implemented in Python: `{code}` | **Assistant:** Here is the code below: `{code}` (No explanation provided on the method used.) |
-| **User:** Tell me how can I use `range()` to print numbers from 10 to 1. | **User:** Tell me how can I use `range()` to print numbers from 10 to 1. |
-| **Assistant:** You can use the `range()` function in Python to generate numbers from 10 to 1 in reverse order by specifying the start, stop, and step parameters. In this case, you start at 10, stop before 1 (since the stop is exclusive), and use a step of -1 to count backwards. Here's how you can do it: `{code}` | **Assistant:** Sure, the `range` function in Python can be used to return a list by wrapping the `range` function in a list(). `{code}` (No explanation on how the code works.) |
-| **User:** Add comments to this code `def hellow(p): print(p)` | **User:** (Same as left) |
-| **Assistant:** Certainly! Below is your Python function with comments added for clarity. Comments in Python start with a `#` and are used to explain what specific parts of the code do. `{code}` | (No corresponding incorrect approach for adding comments.) |
-| **User:** I am using a PostgreSQL database for my project. It has a critical table named `employees`. I need a python snippet utilizing the `psycopg2` library to establish a connection to the database and interact with the `employees` table. | **User:** (Same as left) |
-| **Assistant:** Below is a basic Python snippet that establishes a connection to a PostgreSQL database and demonstrates how to insert a new row, update an existing row, retrieve data, and delete a row from the `employees` table. `{code}` 1. Connection Establishment: `psycopg2.connect()` is used to establish a connection with your PostgreSQL database using the provided credentials. 2. Cursor Creation: A cursor is created using `conn.cursor()`. This cursor is then used to execute SQL commands. ... [Detailed Code Explanation] |  |
+#### Closing Remarks
+- Conclude with a summary or additional insights that could benefit the user, wrapping up your response neatly.
 
 #### Best Practices
-- **Match the Explanation to User's Level**: Tailor the complexity of your explanation to the user's understanding and the query's complexity.
-- **Clarify Before Code**: Offer a brief overview of the approach before diving into the code to set context.
-- **Detail After Code**: After presenting the code, delve into a detailed explanation if the code's steps are complex or numerous.
+- **Tailor to the User's Level**: Adjust the depth of your explanations to match the user's understanding and the complexity of the query.
+- **Clarity Before Code**: Set the stage with a brief overview before diving into the code.
+- **Detail After Code**: Follow up the code with a detailed explanation, especially if the code's steps are intricate.
 
 ### 3. Code Summary
-When a query requires an understanding of the code's functionality rather than the code itself, a summary of the code can be provided. This summary should concisely explain the logic or the approach of the code, focusing on the key functionalities **without** diving into the specifics of the **implementation**.
+When a query centers more on comprehending the code's purpose rather than its intricate details, offer a concise summary that highlights the key functionalities. Feel free to reference specific functions or variables to elucidate how they contribute to the overall operation of the code, while still maintaining a focus on the logic rather than the minutiae of the implementation.
 
- Example : 
-| ✅Correct                                                                                                                                                                                                                                                                                                       | ❌Incorrect                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **User:** Can you explain how a basic weather app retrieves and displays the current weather for a user's location?<br>**Assistant:** Sure, a basic weather app works in four main steps:<br>1. **Determine Location:** *Add summary*<br>2. **Fetch Weather:** *Add summary*<br>3. **Process Data:** *Add summary*<br>4. **Show Weather:** *Add summary* | **User:** Can you explain how a basic weather app retrieves and displays the current weather for a user's location?<br>**Assistant:** Sure, a basic weather app works in four main steps:<br>1. **Determine Location:**<br>2. **Fetch Weather:**<br>3. **Process Data:**<br>4. **Show Weather:**<br>Here is an example of a weather app written in javascript that displays the current weather for a user's location:<br>```// Code for the mentioned app ```|
 
 #### Key Points for Code Summary:
-- **Focus on Logic**: Concentrate on explaining the logic or the approach behind the code.
-- **Be Concise**: Keep the summary brief but informative enough to convey the essential functionality.
-- **Avoid Technical Jargon**: Use plain language to make the summary accessible to users with varying levels of technical expertise.
+- **Logic Over Code**: Emphasize the logic or approach behind the code rather than the code details.
+- **Conciseness is Key**: Keep your summary brief yet informative, covering the essential functionality.
+- **Accessible Language**: Avoid technical jargon to ensure the summary is understandable by users with various levels of expertise.
 
 ### 4. Code Debugging
 When addressing a code correction or debugging query, it's crucial to first identify and clearly explain the incorrect issue within the code. After pinpointing the problem, provide a detailed explanation of the correct code and the necessary adjustments, ensuring that the user understands both what was wrong and how it was fixed.
