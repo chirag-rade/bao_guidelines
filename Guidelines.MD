@@ -11,9 +11,18 @@
 | **Response Structure** | - Begin with interpreting the user's query and identifying relevant concepts.<br>- Correct any incorrect information in the user query.<br>- Be flexible to best answer the user query. |
 | **Code Guidelines** | - Code must be complete and functional.<br>- Enclose code in functions where appropriate.<br>- Include example usage of code.<br>- Comments should add value and provide clarity.<br>- Clearly state and include necessary dependencies. |
 * * *
+
+## Updates/changes
+
+1. [**Use of external files in code**](#external-files-in-code) : If you reference any external files in your code, the code should be wrapped up in a function, and it should be called with a dummy filename in a SEPERATE CELL 
+2. [**Latex syntax**](#latex-syntax) : Use \\\\(..\\\\) , or \\\\[...\\\\] to define latex code instead of using \$..\$ or $$..$$
+3. [**Install commands**](#6-dependencies) : All install commands must precede the code where they are used in. 
+4. [**Code explanation start**](#overview-and-code-presentation): Any content before the actual code should be minimized. At most 4 sentences can be present before starting the code. 
+5. [**Post code explanation**](#post-code-explanation) :  Adjust the complexity of this explanation based on how the user query is interpreted. 
+
 ## Format Guidelines
 [Cheat sheet for Google Colab](https://colab.research.google.com/github/Tanu-N-Prabhu/Python/blob/master/Cheat_sheet_for_Google_Colab.ipynb)
-1. **Markdown Formatting**:
+### Markdown Formatting:
    - Inline code should be wrapped in single backticks (\`).
    - Code blocks should be wrapped in triple backticks (\`\`\`) and specify the programming language for syntax highlighting.
      ```
@@ -21,11 +30,25 @@
      print("hello")
      ```
 	 ```
-2. **Equations**: All equations must be in LaTeX format.
+### Equations: All equations must be in LaTeX format.
+
+### Latex syntax : 
+1. Use \\\\(..\\\\) , or \\\\[...\\\\] to define latex code instead of using \$..\$ or $$..$$
+2. [mathjax](https://docs.mathjax.org/en/latest/input/tex/macros/index.html)
+
 
 ## Response Guidelines
-### 1. Beginning the Response
+### Beginning the Response
 
+#### Overview and Code Presentation
+- **Brief Overview**: Set the context without overwhelming the user. Provide a concise overview of the approach in **no more than four sentences** before presenting the code. Judge the level of detail based on the user prompt. 
+	- Slightly higher detail if the prompt is indirect . 
+	- Very less if the user query is very specific, and asking for the code/function. 
+- **Code**: Immediately present the code block after your brief overview, ensuring it addresses the user's request directly.
+
+#### Post-Code Explanation
+
+Offer an explanation after the code, adjusting the depth based on the complexity and clarity of the prompt and code. Use references to specific lines, functions, and variables **if needed**, but keep it succinct if the code is straightforward.
 #### Acknowledgement and Interpretation
 - Start by **acknowledging** the user's query, ensuring there's clarity on what's being asked.
 - **Identify** any key **concepts** involved and give a succinct explanation if necessary.
@@ -40,33 +63,9 @@
 - **Concept Identification**: Briefly explain relevant concepts or methods to be used.
 - **Balance**: Avoid oversimplifying for complex queries or overcomplicating simple ones.
 
-### 2. Code Explanation
-
-#### Overview and Code Presentation
-- **Brief Overview**: Offer a high-level overview of your approach in no more than four sentences before presenting the code. This helps set the context without overwhelming the user with details upfront.
-- **Code**: Present the code block right after your brief overview, ensuring it directly addresses the user's request.
-
-#### Detailed Explanation
-- **Post-Code Explanation**: Dive into a more detailed explanation after the code, referencing specific lines, functions, and variables as needed. Aim for clarity and brevity, similar to the successful explanations in previous work.
-
-#### Closing Remarks
-- Conclude with a summary or additional insights that could benefit the user, wrapping up your response neatly.
-
-#### Best Practices
-- **Tailor to the User's Level**: Adjust the depth of your explanations to match the user's understanding and the complexity of the query.
-- **Clarity Before Code**: Set the stage with a brief overview before diving into the code.
-- **Detail After Code**: Follow up the code with a detailed explanation, especially if the code's steps are intricate.
-
-### 3. Code Summary
-When a query centers more on comprehending the code's purpose rather than its intricate details, offer a concise summary that highlights the key functionalities. Feel free to reference specific functions or variables to elucidate how they contribute to the overall operation of the code, while still maintaining a focus on the logic rather than the minutiae of the implementation.
 
 
-#### Key Points for Code Summary:
-- **Logic Over Code**: Emphasize the logic or approach behind the code rather than the code details.
-- **Conciseness is Key**: Keep your summary brief yet informative, covering the essential functionality.
-- **Accessible Language**: Avoid technical jargon to ensure the summary is understandable by users with various levels of expertise.
-
-### 4. Code Debugging
+### Code Debugging
 When addressing a code correction or debugging query, it's crucial to first identify and clearly explain the incorrect issue within the code. After pinpointing the problem, provide a detailed explanation of the correct code and the necessary adjustments, ensuring that the user understands both what was wrong and how it was fixed.
 
 #### Key Steps for Code Debugging:
@@ -199,7 +198,8 @@ Examples
 def calculate_and_print_area(radius):
     area = 3.14 * radius ** 2
     print(f"The area of the circle is {area}")
-
+```
+```python
 # Example usage:
 calculate_and_print_area(5)
 ```
@@ -226,6 +226,55 @@ Note
 
 Encapsulating code in functions not only makes your code more organized and reusable but also helps in isolating different parts of the code, making debugging and testing easier.
 
+### External files in code
+1. If you reference any external files in your code, the code should be wrapped up in a function, and it should be called with a dummy filename in a SEPERATE CELL (Code cell or markdown cell does not matter) 
+##### Example : 
+---
+**Assistant**
+```python
+def read_csv_and_count(file):
+    df = pd.read_csv(file)
+    return df['test'].count()
+```
+
+**Assistant**
+```python
+read_csv_and_count('file.csv')
+```
+---
+##### Example : 
+
+---
+**User**
+Can you give python code to take filename and print filename without extension ?
+
+[OLD]
+**Assistant**
+Sure, you can use the `pathlib` module to print a filename without the extension. Here is how you can do it.
+```python
+from pathlib import Path
+filename = "sample.json"
+print (Path(filename).stem)
+```
+The `Path.stem` attribute from the pathlib library in Python gives you the filename without its extension.
+
+
+[NEW]
+**Assistant**
+Sure, you can use the `pathlib` module to print a filename without the extension. Here is how you can do it.
+```python
+from pathlib import Path
+def get_filename_without_extension(path):
+    return Path(path).stem
+```
+```python
+# Example usage:
+filename = get_filename_without_extension("sample.json")
+print(filename)
+```
+The `Path.stem` attribute from the pathlib library in Python gives you the filename without its extension.
+
+---
 ## 3. Code Testing
 
 If the code wrapped in a function, always include at least 1 example of running
@@ -242,7 +291,8 @@ def linear_search_with_count(lst, target):
         if element == target:
             return i, comparisons
     return -1, comparisons
-
+```
+```python
 # Example usage
 lst = [5, 3, 7, 1, 9, 8]
 target = 7
@@ -265,7 +315,7 @@ print(f"Index of target ({target}): {index}, Comparisons made: {comparisons}")
 Proper formatting of comments is crucial for maintaining readability and understanding of code. Follow these formatting guidelines for comments:
 
 - **Space After Comment Symbol**: Always include a space after the comment symbol (e.g., `#` in Python, `//` in JavaScript) before starting your comment text.
-- **Placement**: Comments can be placed either on the same line as the code, following two spaces after the code, or on a separate line directly above the code they refer to, maintaining the same level of indentation as the code.
+- **Placement**: Comments can be placed following two spaces after the code, or on a separate line directly above the code they refer to, maintaining the same level of indentation as the code.
 - **Capitalization**: The first word of a comment should be capitalized, unless it starts with an identifier that begins with a lower case letter. **Do not alter the case of identifiers within comments**.
 
 #### Value-Adding Comments
@@ -310,7 +360,9 @@ def count_set_bits(n):
 ```
 ## 6. Dependencies
 
-Always ensure to install and import all necessary dependencies for your project to function properly.
+1. Always ensure to install and import all necessary dependencies for your project to function properly.
+2. Install commands should always precede their usage in the code. 
+
 
 ✅ Correct Usage
 
@@ -327,16 +379,17 @@ To read a CSV file with pandas, use the following code:
 ```python
 import pandas as pd
 
-# Replace with your csv filepath
-file_path = 'your_csv_file.csv'
-
 def read_csv(file):
     return pd.read_csv(file)
-	
+```
+```python
+
+# Replace with your csv filepath
+file_path = 'your_csv_file.csv'
 read_csv(file_path)
 ```
 
-#### Imports Guidelines
+#### Import Guidelines
 
 When importing packages and modules in Python, follow these best practices:
 
@@ -350,62 +403,42 @@ When importing packages and modules in Python, follow these best practices:
   - `y` is too generic in the context of your code (e.g., `from storage.file_system import options as fs_options`).
 - Use `import y as z` only when `z` is a standard abbreviation (e.g., `import numpy as np`).
  
-# Sample notebooks : 
-## ❌ Wrong
-1. [Notebook1](https://colab.research.google.com/drive/192VwnHKwvgIRz2_DPOX5lvPLU9HhO1KP#revisionId=0B_2XFLV2hMm7d1k3ZHJwTUZSUFhyeUYvRHM2allmSjB4Z3Q4PQ) 
-	1. The first question is not a coding question.
-	2. The first question is not related to algorithms
-	3. The mathematical proof is extra detail which is not required.
-2. [Notebook2](https://colab.research.google.com/drive/14eEfQL5Ngh1F8Mz3ETxb9hQBcfXJQjFM#revisionId=0B_2XFLV2hMm7VlRHUFZSNUszQVRmQnNadnRxZXdvaVpaWTg4PQ)
-	1.The assistant's response does not seem customized to user's query   
-	 >User's intent 
-			>1. refactor python script to add type hints
-			>2. what benefits does this provide for maintainability and error prevention ?
+# Avoid These Issues in Your Conversations
 
-	2. The assistant's response starts with `Definitely!` which does not sound natural when replying to the  user's query. Also the response format does not match as described before 
-	3. This statement is incorrect 
-	  `a function takes a list of integers and returns a dictionary of strings and floats like this`
-	  
-		  1. The function has output type of `Dict[str, int]`
-		  2. From the inline comment in the function and example usage we see even the input type is incorrect. It should be `word_list: List[str]`
-
-	4. No mention about refactoring the code. 
-## ✅ Correct
-1. [Notebook1](https://colab.research.google.com/drive/192VwnHKwvgIRz2_DPOX5lvPLU9HhO1KP#revisionId=0B_2XFLV2hMm7OWhSbjhEMEt1QlA3eHdLUjNqWUgzUFpNM1JzPQ)
-	1. Fixed the following issues 
-	 >1. The first question is not a coding question.
-	>	2. The first question is not related to algorithms
-	>3. The mathematical proof is extra detail which is not required.
-# Checklist 
- 
- - [ ] **Prompt Check**
-	  - [ ] Confirm the prompt is a coding question.
-	  - [ ] Ensure that the first question is directly related to the type of metadata.
-
-- [ ] **Response Check**
-  - [ ] Verify the answer accurately and completely addresses the question.
-  - [ ] Confirm that the code is the best implementation.
-  - [ ] Check for any specific requirements in the question that were missed.
-  - [ ] Ensure the output format is similar to what is described in the guidelines.
-
-- [ ] **Testing Check**
-  - [ ] Test code extensively on selected test cases, including but not limited to: empty lists/strings, whitespaces, negative numbers, repeating elements, missing elements, very small/large values, single characters, zero divisions, corner cases, invalid operations, non-connected graphs, wrong types, even/odd number of elements.
-  - [ ] Paste all test cases in the comment section, not in the notebook.
-  - [ ] Conduct repeat testing after any code modification.
-  - [ ] Add one-two example usage in the conversation.
-
-- [ ] **Comments Check**
-  - [ ] Remove docstrings, Only use docstrings if explicitly asked.
-  - [ ] Use comments effectively to offer insights not immediately obvious (Only on the code lines that are harder to grasp).
-  - [ ] Avoid redundant or overly verbose comments.
-  - [ ] Remove references to non-existent elements (e.g., ‘fixed part’).
-
-- [ ] **Headers Check**
-  - [ ] Ensure each cell is properly attributed to either **Assistant**, **User**, or # Assistant.
-
-- [ ] **Text Check**
-  - [ ] Confirm markdowns contain correct, unambiguous, concise information, well-explained, and grammatically correct.
-  - [ ] Avoid ‘empty’ cells that don’t provide useful information.
-  - [ ] Use code blocks for code snippets and single backticks for inline code and variables.
-  - [ ] Use LaTeX for equations.
-  - [ ] Maintain a professional, educational, friendly, and proactive tone.
+- **Code Related Issues**
+	- [ ] The code is incorrect
+	- [ ] Test cases are not provided in the comment section for complex algorithms or No ‘Example usage’
+	- [ ] The code is not readable
+	- [ ] Output format is not the desired one
+	- [ ] The code provided in the coding cell cannot run
+	- [ ] Test examples outcomes are commented
+	- [ ] Non-trivial code is not embedded in the function
+	- [ ] Missing comments for complex issues
+	- [ ]  Comments are in the same line as the coding line
+	- [ ]  Non-consistent 4-spaces/tab indentation for Python tasks
+	- [ ]  External files are called in the same code block.
+	- [ ]  Using both single and double quotes within the same notebook
+	- [ ]  
+- **Completeness Related Issues**
+  - [ ] The assistant’s content is correct but does not answer the user’s question
+  - [ ] The assistant does not completely answer the user’s questions 
+  - [ ] The assistant provides non optimal code in the first turn and subsequently provides optimal code when prompted by the user. 
+  - [ ] Lack of install commands for external libraries. 
+  - [ ] Non-stated assumptions by the assistant
+  - [ ] Docstrings and comments are unnecessarily used
+  - [ ] Time complexity for non-algorithm tasks
+  - [ ] Non IT question
+  - [ ] Already answered question is asked in the second turn
+- **Language Quality**
+   - [ ] Grammar mistakes
+  - [ ] The assistant jumps immediately to the code
+  - [ ] The explanation in any markdown goes too wide (comparisons with other algorithms, usage...)
+  - [ ] Acknowledge the users request 
+  - [ ] Your latex uses \$..\$ (For latex you should use \\\\(...\\\\) )
+  - [ ]  Empty markdown - does not provide any useful information (e.g., "Below is the code:", "Above is the implementation.")
+- **Minor Issues: Let's Standardize**
+  - [ ] The construct (Logic) of the sentence is not optimal
+  - [ ] Backticks not used for namespaces and coding blocks, or used improperly
+  - [ ] Text or coding cells are unnecessarily split
+  - [ ] Missing headers, improper headers, no space below the header
+  - [ ] More than one test example in Example usage
