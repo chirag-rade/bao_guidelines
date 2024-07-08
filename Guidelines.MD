@@ -454,13 +454,7 @@ When importing packages and modules in Python, follow these best practices:
  
 
 ## 7. Type Hints (Python)
-All Python code should include type hints to improve readability and maintainability. 
-Type hints should be used for 
-1. Function Parameters
-2. Return types
-3. Do **NOT** add type hints for variables
-
-For more information on type hints, refer to the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html#221-type-annotated-code).
+**Do not** add type hints to Python code. All type definitions should be included in the docstrings. Refer to [the Documentation section](#4-Documentation) for more details.
 
 # Avoid These Issues in Your Conversations
 
@@ -473,11 +467,10 @@ For more information on type hints, refer to the [Google Python Style Guide](htt
 	- [ ] Test examples outcomes are commented
 	- [ ] Non-trivial code is not embedded in the function
 	- [ ] Missing comments for complex issues
-	- [ ]  Comments are in the same line as the coding line
-	- [ ]  Non-consistent 4-spaces/tab indentation for Python tasks
-	- [ ]  External files are called in the same code block.
-	- [ ]  Using both single and double quotes within the same notebook
-	- [ ]  
+	- [ ] Comments are in the same line as the coding line
+	- [ ] Non-consistent 4-spaces/tab indentation for Python tasks
+	- [ ] External files are called in the same code block.
+	- [ ] Using both single and double quotes within the same notebook
 - **Completeness Related Issues**
   - [ ] The assistant’s content is correct but does not answer the user’s question
   - [ ] The assistant does not completely answer the user’s questions 
@@ -485,13 +478,13 @@ For more information on type hints, refer to the [Google Python Style Guide](htt
   - [ ] Lack of install commands for external libraries. 
   - [ ] Non-stated assumptions by the assistant
   - [ ] Proper documentation is added without unnecessary filed (Errors, internal arges)
-  - [ ] Type hints (Python) are added for method parameters and return type
+  - [ ] No type hint added (Python)
   - [ ] comments are unnecessarily used
   - [ ] Time complexity for algorithmic tasks
   - [ ] Non IT question
   - [ ] Already answered question is asked in the second turn
 - **Language Quality**
-   - [ ] Grammar mistakes
+  - [ ] Grammar mistakes
   - [ ] The assistant jumps immediately to the code
   - [ ] The explanation in any markdown goes too wide (comparisons with other algorithms, usage...)
   - [ ] Acknowledge the users request 
