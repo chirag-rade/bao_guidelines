@@ -220,7 +220,7 @@ print(sorted_list)
 - **Clear Purpose**: Each function should have a clear, singular purpose, making the code easier to understand and test.
 - **Naming Conventions**: Use descriptive names for functions that clearly indicate what the function does.
 - **Parameters and Return Values**: Design functions to accept parameters for their inputs and use return values to output their results, rather than relying on global variables or printing directly within the function (unless printing is the function's purpose).
-- **Documentation**: [Read the Docstrings section](#4-docstrings)
+- **Documentation**: [Read the Documentation section](#4-Documentation)
 
 Note
 
@@ -300,14 +300,52 @@ index, comparisons = linear_search_with_count(lst, target)
 print(f"Index of target ({target}): {index}, Comparisons made: {comparisons}")
 
 ```
-## 4. Docstrings: 
+## 4. Documentation 
 
-1. Do **NOT** add docstrings by default.
-    1. You **CAN** add a docstring for the **function description** if the purpose of the function is not clear.
+All functions in the code should contain documentation with the following parts:
+1. Parameters.
+2. Return type.
 2. Do **NOT** include explanations for:
-    1. Parameters.
-    2. Return type.
+    1. Errors that the funciton might throw (Raises)
     3. Other variables inside the function.
+
+### Formats
+Documentations should be added in all supported languages, each following a specific format:
+1. **Python:**
+Follow the normal docstring syntax. Refer to the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html#381-docstrings) for more information. An example of a Python docstring is:
+      ```python
+        """Connects to the next available port.
+
+        Args:
+          minimum: A port value greater or equal to 1024.
+
+        Returns:
+          The new minimum port.
+        """
+      ```
+2. **JavaScript:** 
+Use the [JSDoc](https://github.com/google/closure-compiler/wiki/Annotating-JavaScript-for-the-Closure-Compiler) format. Refer to the [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html#jsdoc) for more details. An example of a JSDoc comment is:
+      ```javascript
+       /**
+          * Multiple lines of JSDoc text are written here,
+          * wrapped normally.
+          * @param {number} arg A number to do something to.
+          */
+         function doSomething(arg) { … }
+      ```
+
+3. **Go:** 
+Use the [godoc](https://go.dev/blog/godoc) format. Refer to the [Google Go Style Guide](https://google.github.io/styleguide/go/best-practices#documentation) for best practices. An example of a godoc comment is:
+      ```go
+      // ConnectsToNextAvailablePort connects to the next available port.
+      //
+      // Args:
+      //    minimum int: A port value greater or equal to 1024.
+      //
+      // Returns:
+      //    int: The new minimum port.
+      func ConnectsToNextAvailablePort(minimum int) int { … }
+      ```
 
 ## 5. Code Comments Guidelines
 [Useful and Useless Code Comments](https://blog.jim-nielsen.com/2021/useful-and-usless-code-comments/)
@@ -333,7 +371,14 @@ Not all comments are equally useful. To ensure comments add value to the code:
 
 ```python
 def count_set_bits(n):
-  """Counts the number of set bits (1s) in the binary representation of the given integer."""
+  """Counts the number of set bits (1s) in the binary representation of the given integer.
+
+    Args:
+        n (int): The integer whose set bits are to be counted.
+
+    Returns:
+        int: The number of set bits in the binary representation of the integer.
+  """
   count = 0
   while n:
     # Flip the least significant set bit
@@ -348,9 +393,13 @@ def count_set_bits(n):
 
 ```python
 def count_set_bits(n):
-    """
-    Counts the number of set bits (1s) in the binary representation of the
-    given integer.
+    """Counts the number of set bits (1s) in the binary representation of the given integer.
+
+      Args:
+          n (int): The integer whose set bits are to be counted.
+
+      Returns:
+          int: The number of set bits in the binary representation of the integer.
     """
     count = 0  # first, set count as zero
     while n:  # while n is true
@@ -403,6 +452,16 @@ When importing packages and modules in Python, follow these best practices:
   - `y` is too generic in the context of your code (e.g., `from storage.file_system import options as fs_options`).
 - Use `import y as z` only when `z` is a standard abbreviation (e.g., `import numpy as np`).
  
+
+## 7. Type Hints (Python)
+All Python code should include type hints to improve readability and maintainability. 
+Type hints should be used for 
+1. Function Parameters
+2. Return types
+3. Do **NOT** add type hints for variables
+
+For more information on type hints, refer to the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html#221-type-annotated-code).
+
 # Avoid These Issues in Your Conversations
 
 - **Code Related Issues**
@@ -425,8 +484,10 @@ When importing packages and modules in Python, follow these best practices:
   - [ ] The assistant provides non optimal code in the first turn and subsequently provides optimal code when prompted by the user. 
   - [ ] Lack of install commands for external libraries. 
   - [ ] Non-stated assumptions by the assistant
-  - [ ] Docstrings and comments are unnecessarily used
-  - [ ] Time complexity for non-algorithm tasks
+  - [ ] Proper documentation is added without unnecessary filed (Errors, internal arges)
+  - [ ] Type hints (Python) are added for method parameters and return type
+  - [ ] comments are unnecessarily used
+  - [ ] Time complexity for algorithmic tasks
   - [ ] Non IT question
   - [ ] Already answered question is asked in the second turn
 - **Language Quality**
